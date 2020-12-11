@@ -1,16 +1,20 @@
 import requests
 
-url = 'http://wttr.in/london?nTqu&lang=en'
-response = requests.get(url)
-response.raise_for_status()
-print(response.text)
 
-url = 'http://wttr.in/Шереметьево?nTqm&lang=ru'
-response = requests.get(url)
-response.raise_for_status()
-print(response.text)
+def get_weather(city: str):
+    params = {
+        "nTqm": "",
+        "lang": "ru",
+    }
+    url = f"http://wttr.in/{city}"
+    try:
+        response = requests.get(url, params=params)
+        return response.text
+    except requests.exceptions.ConnectionError:
+        return "Не могу подключиться к сервер!"
 
-url = 'http://wttr.in/Череповец?nTqm&lang=ru'
-response = requests.get(url)
-response.raise_for_status()
-print(response.text)
+
+if __name__ == "__main__":
+    cities = ["London", "Шереметьево", "Череповец"]
+    for city in cities:
+        print(get_weather(city))
