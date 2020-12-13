@@ -10,8 +10,6 @@ def get_weather(city: str):
     response = requests.get(url, params=params)
     response.raise_for_status()
     decoded_response = response.json()
-    if "error" in decoded_response:
-        raise requests.exceptions.HTTPError(decoded_response["error"])
     return response.text
 
 
