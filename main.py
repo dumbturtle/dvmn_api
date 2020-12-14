@@ -9,7 +9,6 @@ def get_weather(city: str):
     url = f"http://wttr.in/{city}"
     response = requests.get(url, params=params)
     response.raise_for_status()
-    decoded_response = response.json()
     return response.text
 
 
